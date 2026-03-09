@@ -10,52 +10,45 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Environment(AppState.self) private var appState
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        @Bindable var appState = appState
+        ZStack {
+            HomeView()
+            MenuView()
+        }.font(.custom("HelveticaNeue", size: 16,relativeTo: .body))
+            .fullScreenCover(isPresented: $appState.isPlayerOpen) {
+                PlayerView()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+}
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+struct MenuView: View {
+    @Environment(AppState.self) private var appState
+    var body: some View {
+        HStack {
+            VStack {
+                Button {} label: {
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(.text)
+                }
+                Spacer()
+                Button {
+                    appState.isPlayerOpen.toggle()
+                } label: {
+                    Text("Menu").padding(16).background(Circle().fill(.base)).foregroundStyle(.text)
+                }
             }
+            .padding(8)
+            Spacer()
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    ContentView().environment(AppState())
 }
+
+
