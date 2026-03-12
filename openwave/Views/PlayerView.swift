@@ -19,20 +19,30 @@ struct PlayerView: View {
 
     var body: some View {
         ZStack {
-            Color(appState.selectedGenre?.color ?? .accent).ignoresSafeArea()
+            Color(appState.currentlyPlayingGenre?.color ?? .accent).ignoresSafeArea()
             VStack{
                 GeometryReader { geo in
                     let circleSize = geo.size.width * 0.75
                     let sliderWidth = geo.size.width * 0.85
                     HStack{
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark").foregroundStyle(.text).padding(10)
-                                .background(Circle().fill(.base))
-                        }.padding(.leading, 24)
-                            .padding(.top, 16)
-                        
+                        VStack(alignment: .center, spacing: 24) {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Image(systemName: "xmark").foregroundStyle(.text).padding(10)
+                                    .background(Circle().fill(.base))
+                            }
+
+                            Text(appState.currentlyPlayingGenre?.name ?? "")
+                                .foregroundStyle(.text)
+                                .preferredColorScheme(.light)
+                                .fontWeight(.medium)
+                                .fixedSize()
+                                .rotationEffect(Angle(degrees: -90.0))
+                                .frame(width: 20, height: 96)
+                        }
+                        .padding(.leading, 16)
+                        .padding(.top, 16)
                         Spacer()
                     }.frame(width:sliderWidth)
                     
@@ -43,13 +53,15 @@ struct PlayerView: View {
                                 .frame(width: circleSize, height: circleSize)
                             Button {} label: {
                                 Image(systemName: "backward.fill").foregroundStyle(.text)
-                            }.position(x: 48, y: circleSize / 2).font(.largeTitle)
+                            }.position(x: 48, y: circleSize / 2).font(.title)
                             Button {} label: {
                                 Image(systemName: "forward.fill").foregroundStyle(.text)
-                            }.position(x: circleSize - 48, y: circleSize/2).font(.largeTitle)
-                            Button {} label: {
-                                Image(systemName: "pause").foregroundStyle(.text)
-                            }.position(x: circleSize / 2, y: circleSize - 48).font(.largeTitle)
+                            }.position(x: circleSize - 48, y: circleSize/2).font(.title)
+                            Button {
+                                appState.audioPlayer.toggle(url: appState.currentlyPlayingGenre?.streamUrl ?? "")
+                            } label: {
+                                Image(systemName: appState.audioPlayer.isPlaying ? "pause" : "play.fill").foregroundStyle(.text)
+                            }.position(x: circleSize / 2, y: circleSize - 48).font(.largeTitle).fontWeight(.black)
                         }.frame(width: circleSize, height: circleSize)
                         HStack {
                             Button {

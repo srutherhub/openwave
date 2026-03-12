@@ -64,7 +64,7 @@ struct HomeView: View {
                         let angle = vm.angle(for: index)
                         let rotation = shouldFlip(angle: angle) ? angle + .pi : angle
                         
-                        GenreLabel(genreName: vm.list[index].name, isSelected: isSelected,isPlayerOpen: $appState.isPlayerOpen)
+                        GenreLabel(genreName: vm.list[index].name, isSelected: isSelected)
                             .rotationEffect(.radians(rotation))
                             .animation(.spring(response: 0.3), value: vm.selectedIndex)
                             .position(position(for: index, in: geo.size))
@@ -87,16 +87,17 @@ struct HomeView: View {
         }}}
 
 struct GenreLabel: View {
+    @Environment(AppState.self) private var appState
     var genreName:String
     var isSelected:Bool
-    @Binding var isPlayerOpen:Bool
     
     var body: some View {
         HStack (spacing: 24){
             Text(genreName).scaleEffect(isSelected ? 1.3 : 1.0).padding(16).foregroundStyle(Color("Text")).fontWeight(.medium)
             if (isSelected) {
                 Button("Play") {
-                    isPlayerOpen.toggle()
+                    appState.play()
+                    appState.isPlayerOpen.toggle()
                 }
             }
         }

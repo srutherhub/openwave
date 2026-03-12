@@ -32,7 +32,7 @@ struct MenuView: View {
             VStack {
                 Button {} label: {
                     Image(systemName: "ellipsis")
-                        .foregroundStyle(.text)
+                        .foregroundStyle(Color(.text)).colorScheme(.light)
                 }
                 Spacer()
                 Button {

@@ -13,5 +13,12 @@ class AppState {
     static let shared = AppState()
     
     var selectedGenre : GenreModel? = nil
+    var currentlyPlayingGenre: GenreModel? = nil
     var isPlayerOpen: Bool = false
+    var audioPlayer:AudioPlayerManager = AudioPlayerManager()
+    
+    func play() {
+        audioPlayer.play(url: selectedGenre?.streamUrl ?? "")
+        currentlyPlayingGenre = selectedGenre
+    }
 }
