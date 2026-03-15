@@ -83,6 +83,8 @@ struct HomeView: View {
                             appState.selectedGenre = vm.list[vm.selectedIndex]
                         }
                 )
+            }.onAppear {
+                appState.selectedGenre = vm.list[vm.selectedIndex]
             }
         }}}
 
@@ -92,17 +94,23 @@ struct GenreLabel: View {
     var isSelected:Bool
     
     var body: some View {
-        HStack (spacing: 24){
-            Text(genreName).scaleEffect(isSelected ? 1.3 : 1.0).padding(16).foregroundStyle(Color("Text")).fontWeight(.medium)
+        HStack (spacing:4) {
+            Text(genreName).foregroundStyle(Color("Text"))
             if (isSelected) {
-                Button("Play") {
+                Button() {
                     appState.play()
                     appState.isPlayerOpen.toggle()
+                } label : {
+                    HStack{
+                        Text("Play")
+                        Image(systemName: "play.fill")
+                    }.padding(8).foregroundStyle(appState.selectedGenre?.color ?? .text)
                 }
             }
-        }
+        }.fontWeight(.medium)
     }
 }
+
 
 #Preview {
     HomeView().environment(AppState())

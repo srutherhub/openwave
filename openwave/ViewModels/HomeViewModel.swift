@@ -12,7 +12,7 @@ import SwiftUI
 class HomeViewModel {
     
     let list: [GenreModel] = [
-        GenreModel(name: "Pop",          color: .pink, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
+        GenreModel(name: "Pop",          color: .pink, streamUrl: "https://stream.radioparadise.com/mp3-128"),
         GenreModel(name: "Hip Hop",      color: .orange, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Classical",    color: .brown, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Jazz",         color: .indigo, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
@@ -43,7 +43,7 @@ class HomeViewModel {
         GenreModel(name: "Alternative",  color: .gray, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Disco",        color: .pink, streamUrl: "https://ice5.somafm.com/spacestation-128-aac")
     ]
-    var rotationOffset: Double = 0
+    var rotationOffset: Double = 3 * Double.pi / 2
     var dragStart: Double = 0
 
     func angle(for index: Int) -> Double {
@@ -55,7 +55,7 @@ class HomeViewModel {
             let distA = abs(atan2(sin(angle(for: a) - Double.pi), cos(angle(for: a) - Double.pi)))
             let distB = abs(atan2(sin(angle(for: b) - Double.pi), cos(angle(for: b) - Double.pi)))
             return distA < distB
-        }) ?? 24
+        }) ?? 0
     }
 
     func onDragChanged(_ value: DragGesture.Value) {

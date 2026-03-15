@@ -38,8 +38,9 @@ struct MenuView: View {
                 Button {
                     appState.isPlayerOpen.toggle()
                 } label: {
-                    Text("Menu").padding(16).background(Circle().fill(.base)).foregroundStyle(.text)
-                }
+                    Image(systemName: "music.note.square.stack.fill").padding(16).background(Circle().fill(.base)).foregroundStyle(Color(appState.selectedGenre?.color ?? .text))
+                }.disabled(!appState.audioPlayer.isPlaying && appState.currentlyPlayingGenre == nil)
+                    .opacity(!appState.audioPlayer.isPlaying && appState.currentlyPlayingGenre == nil ? 0.5 : 1)
             }
             .padding(8)
             Spacer()

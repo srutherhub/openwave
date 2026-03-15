@@ -25,26 +25,25 @@ struct PlayerView: View {
                     let circleSize = geo.size.width * 0.75
                     let sliderWidth = geo.size.width * 0.85
                     HStack{
-                        VStack(alignment: .center, spacing: 24) {
                             Button {
                                 dismiss()
                             } label: {
                                 Image(systemName: "xmark").foregroundStyle(.text).padding(10)
                                     .background(Circle().fill(.base))
                             }
-
+                        Spacer()
                             Text(appState.currentlyPlayingGenre?.name ?? "")
                                 .foregroundStyle(.text)
-                                .preferredColorScheme(.light)
+                                .colorScheme(.light)
                                 .fontWeight(.medium)
-                                .fixedSize()
-                                .rotationEffect(Angle(degrees: -90.0))
-                                .frame(width: 20, height: 96)
-                        }
-                        .padding(.leading, 16)
-                        .padding(.top, 16)
-                        Spacer()
-                    }.frame(width:sliderWidth)
+
+
+                    }.padding(.horizontal, 16)
+                    
+                    VStack {
+                        Text("title "+appState.audioPlayer.songTitle)
+                        Text("artist "+appState.audioPlayer.artistName)
+                    }
                     
                     VStack(spacing: 24) {
                         ZStack {
