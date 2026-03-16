@@ -13,11 +13,11 @@ class HomeViewModel {
     
     let list: [GenreModel] = [
         GenreModel(name: "Pop",          color: .pink, streamUrl: "https://stream.radioparadise.com/mp3-128"),
-        GenreModel(name: "Hip Hop",      color: .orange, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
+        GenreModel(name: "Hip Hop",      color: .orange, streamUrl: "http://pureplay.cdnstream1.com/6041_128.mp3"),
         GenreModel(name: "Classical",    color: .brown, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Jazz",         color: .indigo, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
-        GenreModel(name: "Lo-Fi",        color: .mint, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
-        GenreModel(name: "Electronic",   color: .cyan, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
+        GenreModel(name: "Lo-Fi",        color: .mint, streamUrl: "https://radio.sutekihost.com/listen/bgmvibes/radio.mp3"),
+        GenreModel(name: "Electronic",   color: .cyan, streamUrl: "http://pulseedm.cdnstream1.com:8124/1373_128"),
         GenreModel(name: "Soundtracks",  color: .yellow , streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "R&B",          color: .orange, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Rock",         color: .red, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
@@ -32,7 +32,7 @@ class HomeViewModel {
         GenreModel(name: "Indie",        color: .mint, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "K-Pop",        color: .pink, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Dance",        color: .purple, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
-        GenreModel(name: "House",        color: .orange, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
+        GenreModel(name: "House",        color: .orange, streamUrl: "http://198.15.94.34:8006/stream"),
         GenreModel(name: "Techno",       color: .teal, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Ambient",      color: .cyan, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
         GenreModel(name: "Folk",         color: .brown, streamUrl: "https://ice5.somafm.com/spacestation-128-aac"),
